@@ -7,7 +7,7 @@
     <div class="hotel-list">
       <div class="hotel-name">
         所属主机：
-        <el-select v-model="value" placeholder="请选择主机">
+        <el-select v-model="value" filterable placeholder="请选择主机">
           <el-option
             v-for="item in options"
             :key="item.roomId"
@@ -59,6 +59,7 @@ export default {
   },
   mounted() {
     this.getAddHostList()
+    // this.getScenceList()
   },
   methods: {
     handleSizeChange(val) {

@@ -13,8 +13,8 @@ sessionStorage.setItem('account', loginUser)
 sessionStorage.setItem('password', password)
 console.log(loginUser, password, type)
 
-const base_url = 'https://demo.live-ctrl.com/'
-const base_url1 = 'http://demo.live-ctrl.com/'
+const base_url = 'https://www.live-ctrl.com/'
+const base_url1 = 'http://www.live-ctrl.com/'
 // const base_url2 = 'http://home.gmaple.cn:8080/'
 
 const base_axios_options = {
@@ -140,5 +140,9 @@ export const Api = {
   //酒店选择下拉框数据
   getTmallHotelList: (params) => {
     return postAxios1.post('aijukex/op/hotelScript_getHotelList', qs.stringify(params)).then(res => res.data);
+  },
+  //天猫绑定测试接口
+  getTmallTest: (params) => {
+    return postAxios1.post('aijukex/op/op_welcome', qs.stringify(params)).then(res => res.data);
   },
 }

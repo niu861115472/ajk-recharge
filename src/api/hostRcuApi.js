@@ -2,8 +2,8 @@ import axios from 'axios'
 import qs from 'qs'
 import md5 from 'js-md5'
 
-const base_url1 = 'http://demo.live-ctrl.com/aijukex/'
-const base_url = 'http://demo.live-ctrl.com/verslink/'
+const base_url1 = 'http://www.live-ctrl.com/aijukex/'
+const base_url = 'http://www.live-ctrl.com/verslink/'
 const app_key = '4375b25d6994a1b9'
 const app_sercet = 'Fp7gY4MR5EZkU6mvHVZzr2schVSGezNH'
 setInterval(() => {

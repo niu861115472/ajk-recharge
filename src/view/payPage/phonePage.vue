@@ -1,9 +1,15 @@
 <template>
   <div class="hello">
-    <div class="input">
-      <p>充值金额：</p>
-      <input class="rechargeInp" v-model="value" />
+    <div class="send_tip">
+      <p>充500赠送20元</p>
     </div>
+    <div class="input">
+       <el-radio v-model="radio" border label="50">50</el-radio>
+       <el-radio v-model="radio" border label="100">100</el-radio>
+       <el-radio v-model="radio" border label="200">200</el-radio>
+       <el-radio v-model="radio" border label="500">500</el-radio>
+    </div>
+    
     <div class="rechargeType">
       <div class="ZFB">
         <div>
@@ -39,19 +45,16 @@ export default {
       value: "",
       value1: "ZFB",
       // value2: "WX",
-      picked: "ZFB"
+      picked: "ZFB",
+      radio: '50'
     };
   },
   methods: {
     submit() {
-      if (this.value == "") {
-        alert("请输入金额");
-        return;
-      }
-      // if (!/^\d+$/.test(this.value)) {
-      //   alert("请输入整数");
-      //   return;
+      // if(this.radio == '500'){
+      //   this.radio = Number(this.radio) - 20
       // }
+      console.log(this.radio)
       if (this.picked == "ZFB") {
         this.submitZfbPay();
       } else {
@@ -64,7 +67,7 @@ export default {
       let formData = new FormData();
       formData.append("accountNo", sessionStorage.getItem("account"));
       formData.append("subject", "酒店余额充值");
-      formData.append("totalAmount", this.value);
+      formData.append("totalAmount", this.radio);
       formData.append("body", "爱居客酒店主机使用余额充值");
 
       let config = {
@@ -113,7 +116,7 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
-  width: 400px;
+  width: 500px;
   height: 300px;
   border-radius: 10px;
   background: #fff;
@@ -122,7 +125,7 @@ export default {
   position: relative;
   top: 20px;
   display: flex;
-  padding: 40px 20px;
+  padding: 20px 20px 40px 20px;
   margin: 0px 20px 20px 20px;
 }
 .input p {
@@ -173,7 +176,7 @@ export default {
   width: 100px;
 }
 .submit {
-  width: 400px;
+  width: 500px;
   position: relative;
   cursor: pointer;
   top: 20px;
@@ -193,5 +196,9 @@ label {
 #qrcode{
   width: 200px;
   height: 200px;
+}
+.send_tip{
+  color: #ca600a;
+  margin: 20px 0 0 50px;
 }
 </style>

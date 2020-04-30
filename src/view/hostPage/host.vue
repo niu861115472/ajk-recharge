@@ -7,7 +7,7 @@
       </div>
       <el-col :span="24">
         <el-menu
-          default-active="1"
+          default-active="1-1"
           class="el-menu-vertical-demo"
           @select="handleSelect"
           background-color="#2f2f31"
@@ -22,7 +22,7 @@
             <el-menu-item-group>
               <el-menu-item index="1-1">主机管理</el-menu-item>
               <el-menu-item index="1-2">设备管理</el-menu-item>
-              <!-- <el-menu-item index="1-3">情景管理</el-menu-item> -->
+              <el-menu-item index="1-3">情景管理</el-menu-item>
               <el-menu-item index="1-4">设备状态</el-menu-item>
               <el-menu-item index="1-5">设备日志</el-menu-item>
             </el-menu-item-group>
@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      index: ""
+      index: "1-1"
     };
   },
   methods: {

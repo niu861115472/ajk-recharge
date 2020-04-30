@@ -29,8 +29,15 @@
                            <span>&nbsp;&nbsp;{{list.address}}</span>
                        </div>
                        <div class="right">
-                           <p>充值余额: <span style="color:#f00d46">{{list.payMoney}}</span></p>
-                           <p>赠送余额: <span style="color:#1dda55">{{list.giveMoney}}</span></p>
+                           <p>
+                               <span>余额：</span>
+                               <span>{{(list.payMoney+list.giveMoney).toFixed(2)}}</span>
+                               <span>(充值余额：</span>
+                               <span style="color:#f00d46">{{list.payMoney}}</span>
+                               &nbsp;&nbsp;
+                               <span>赠送余额：</span>
+                               <span style="color:#1dda55">{{list.giveMoney}})</span>
+                            </p>
                            <div @click="qrCode">充值</div>
                        </div>
                    </div>
@@ -216,12 +223,13 @@ li{list-style: none;}
     color:#939da8
 }
 .index .box .main .house_info .top_msg .right{
-    width: 30%;
+    width: 35%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 .index .box .main .house_info .top_msg .right div{
     padding: 5px 20px;
+    margin-left: 50px;
     font-size: 14px;
     color: #ffffff;
     border-radius: 5px;

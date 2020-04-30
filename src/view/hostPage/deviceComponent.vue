@@ -40,14 +40,14 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination
+        <!-- <el-pagination
           background
           layout="prev, pager, next"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :page-size="10"
           :total="tableData.length"
-        ></el-pagination>
+        ></el-pagination> -->
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@ export default {
       this.$rcuApi.getDevicesList({
         roomId:'0020-6666-FFFFFFFFFFFFFFFF'
       }).then(res=>{
-        this.tableData = res.devices
+        this.tableData = res.list
       })
     },
   }
@@ -198,6 +198,8 @@ export default {
   }
   .house-list {
     width: 100%;
+    height: 600px;
+    overflow-y: scroll;
     margin-top: 30px;
   }
   .hotel-name{

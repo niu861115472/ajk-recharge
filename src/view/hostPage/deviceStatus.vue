@@ -98,14 +98,14 @@ export default {
     getAddHostList() {
       this.$rcuApi.getAddHostList().then(res => {
         this.options = res.result;
-        this.getDeviceList(res.result[0].roomId)
+        // this.getDeviceList('0020-6666-FFFFFFFFFFFFFFFF')
       });
     },
     getDeviceList(roomId){
       this.$rcuApi.getDevicesList({
         roomId:roomId
       }).then(res=>{
-        this.tableData = res.devices
+        this.tableData = res.list
       })
     },
   //设备控制

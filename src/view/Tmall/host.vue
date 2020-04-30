@@ -7,12 +7,13 @@
       </div>
       <el-col :span="24">
         <el-menu
-          default-active="1"
+          default-active="1-1"
           class="el-menu-vertical-demo"
           @select="handleSelect"
           background-color="#2f2f31"
           text-color="#fff"
           active-text-color="#ffd04b"
+          :default-openeds="open_list"
         >
           <el-submenu index="1">
             <template slot="title">
@@ -62,7 +63,8 @@ export default {
   },
   data() {
     return {
-      index: ""
+      index: "1-1",
+      open_list: ["1"]
     };
   },
   methods: {
@@ -94,7 +96,7 @@ li {
   display: flex;
 }
 .home .tac {
-  height: 100%;
+  height: auto;
   background: #2e363f;
 }
 .home .img-box {
@@ -153,6 +155,7 @@ li {
 .home .box .footer {
   width: 90%;
   position: fixed;
+  z-index: 999;
   text-align: center;
   bottom: 0;
   height: 40px;

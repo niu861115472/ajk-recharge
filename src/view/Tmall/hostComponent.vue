@@ -8,7 +8,7 @@
     <div class="hotel-list" v-show="show">
       <div class="hotel-name">
         酒店名称：
-        <el-select v-model="value" filterable placeholder="请选择">
+        <el-select v-model="value" @clear="clearHotelName" clearable filterable placeholder="请选择">
           <el-option
             v-for="(item,index) in options"
             :key="index"
@@ -22,10 +22,11 @@
       <div class="house-list">
         <el-table :data="tableData" stripe border style="width: 78%">
           <el-table-column fixed prop="hotelName" label="酒店" width="180"></el-table-column>
+          <el-table-column prop="serverId" label="主机ID" width="300"></el-table-column>
           <el-table-column prop="houseId" label="房间" width="120"></el-table-column>
           <el-table-column prop="hotelId" label="天猫精灵对应的酒店" width="180"></el-table-column>
           <el-table-column prop="roomId" label="天猫精灵对应的房间" width="180"></el-table-column>
-          <el-table-column prop="serverId" label="主机ID" width="300"></el-table-column>
+          
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <el-button @click="changeHost(scope.row)" type="text" size="small">修改</el-button>
@@ -33,7 +34,8 @@
                 @click="handleOpenOrClose(scope.row)"
                 type="text"
                 size="small"
-              >{{scope.row.isDelete == '0' ? '禁用' : '启用'}}</el-button>
+              > 删除</el-button>
+              <el-button @click="handleTest(scope.row)" type="text" size="small">测试</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -86,7 +88,7 @@
       </div>
       <div>
         <p>主机ID：</p>
-        <el-select v-model="value3" filterable placeholder="请选择">
+        <el-select clearable v-model="value3" @clear="clear" filterable placeholder="请选择">
           <el-option
             v-for="item in options2"
             :key="item.id"
@@ -140,6 +142,10 @@ export default {
         {
           hotelId:'77e4b1686e4946b0a5d3d414674b047e',
           name:'将军大酒店'
+        },
+        {
+          hotelId:'bb3d683c9d59481386238b1c58927f4d',
+          name:'杭州寻觅民宿'
         }
       ],
       status: "",
@@ -223,8 +229,18 @@ export default {
       this.value3 = arr1[0].name;
       this.hostId = arr1[0].serverId;
     },
+    handleTest(row){
+      // alert(row.serverId)
+      this.$api.getTmallTest({
+        hostId:row.serverId
+      }).then(res=>{
+        if(res.success){
+          console.log(res)
+        }
+      })
+    },
     handleOpenOrClose(row) {
-      let isDelete = row.isDelete == "0" ? "1" : "0";
+      let isDelete = 1
       this.isType = 3;
       let data = {
         id: row.id,
@@ -270,8 +286,11 @@ export default {
         type: this.isType,
         isDelete: ""
       };
-
+      console.log(data)
       this.addOrUpdateTmall(data);
+    },
+    clear(){
+      this.hostId = ''
     },
     cancel() {
       this.show = true;
@@ -312,6 +331,9 @@ export default {
     selectSearchHotel(item) {
       this.searchName = item;
     },
+    clearHotelName(){
+      this.searchName = ''
+    },
     //搜索
     search() {
       this.getTmallSearchList(this.searchName);
@@ -324,17 +346,13 @@ export default {
     addOrUpdateTmall(data) {
       this.$api.addOrUpdateTmall(data).then(res => {
         if (res.success) {
-          if (this.isType == "3") {
             this.$message({
               type: "success",
-              message: "删除成功!"
+              message: `${this.isType == 3 ? '删除成功!' : '成功'}`
             });
-          } else {
             this.show = true;
             this.show1 = false;
             this.getTmallSearchList(name);
-            alert(res.msg);
-          }
         } else {
           alert(res.msg);
         }
@@ -352,9 +370,9 @@ export default {
     top: 20px;
   }
   .tip {
-    position: fixed;
+    // position: absolute;
     z-index: 999;
-    width: 86.5%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     color: #666666;
@@ -382,7 +400,7 @@ export default {
   .hotel-list {
     width: 90%;
     position: relative;
-    top: 70px;
+    top: 10px;
     padding: 30px;
     background: #ffffff;
     border-radius: 10px;

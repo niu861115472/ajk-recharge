@@ -8,7 +8,7 @@
     <div class="hotel-list" v-show="show">
       <div class="hotel-name">
         酒店名称：
-        <el-select v-model="value" filterable placeholder="请选择">
+        <el-select v-model="value" @clear="clearHotelName" clearable filterable placeholder="请选择">
           <el-option
             v-for="item in options"
             :key="item.id"
@@ -111,8 +111,10 @@ export default {
       console.log(val);
     },
     selectHotelId(id) {
-      console.log(id);
       this.hotelId = id;
+    },
+    clearHotelName(){
+      this.hotelId = ''
     },
     deleteRow(index, rows) {
       rows.splice(index, 1);
@@ -231,9 +233,8 @@ export default {
     top: 20px;
   }
   .tip {
-    position: fixed;
     z-index: 999;
-    width: 86.5%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     color: #666666;
@@ -261,7 +262,7 @@ export default {
   .hotel-list {
     width: 90%;
     position: relative;
-    top: 70px;
+    top: 10px;
     padding: 30px;
     background: #ffffff;
     border-radius: 10px;
