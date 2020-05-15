@@ -33,7 +33,7 @@ const postAxios1 = axios.create(Object.assign({}, { baseURL: url1 }, base_axios_
 export const Api = {
   // 获取酒店用户列表
   getHotelUserList: (params) => {
-    return postAxios.post(`aijukex/op/hotelPay_getHotelUserList?loginUser=${loginUser}&password=${password}&type=${type}`, qs.stringify(params)).then(res => res.data);
+    return postAxios.post(`aijukex/op/hotelPay_getHotelUserList?loginUser=${loginUser}&password=${password}&type=${type}&`+qs.stringify(params)).then(res => res.data);
   },
   //赠送余额接口
   getSendBalance: (params) => {

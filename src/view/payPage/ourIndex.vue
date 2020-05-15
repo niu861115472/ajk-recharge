@@ -25,14 +25,14 @@
       </el-select>-->
       <div class="search" @click="toSearch()">查询</div>
 
-      <el-table :data="tableData" border style="width:77%">
+      <el-table :data="tableData" border style="width:75%">
         <el-table-column fixed prop="accountNo" label="账号" width="120"></el-table-column>
         <el-table-column prop="userName" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="telephone" label="手机号" width="220"></el-table-column>
+        <el-table-column prop="telephone" label="手机号" width="180"></el-table-column>
         <el-table-column prop="recharge" label="充值余额" width="120"></el-table-column>
         <el-table-column prop="give" label="赠送余额" width="120"></el-table-column>
         <!-- <el-table-column prop="address" label="关联酒店" width="280"></el-table-column> -->
-        <el-table-column fixed="right" label="操作" width="300">
+        <el-table-column fixed="right" label="操作" width="280">
           <template slot-scope="scope">
             <!-- <el-button @click="handleClick(scope.row,scope.$index)" type="text" size="small">
                     <span v-show="scope.row.isUse == false">停用</span>
@@ -59,7 +59,7 @@
         layout="prev, pager, next"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :page-size="10"
+        :page-size="8"
         :total="this.total"
       ></el-pagination>
     </div>
@@ -81,7 +81,7 @@ export default {
       childVal: false,
       ins: 0,
       setType: "",
-      PageSize: 10,
+      PageSize: 8,
       currentPage: 1,
       options: [
         {
@@ -212,7 +212,7 @@ export default {
         .getHotelUserList({
           accountNo: this.input,
           pageNo: this.currentPage,
-          pageSize: "10",
+          pageSize: "8",
           status: "0"
         })
         .then(res => {
